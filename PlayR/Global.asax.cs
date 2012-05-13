@@ -1,6 +1,9 @@
-﻿using System.Web.Mvc;
+﻿using System;
+using System.Web;
+using System.Web.Mvc;
 using System.Web.Routing;
 using SignalR;
+using SquishIt.Framework;
 
 namespace PlayR
 {
@@ -29,6 +32,8 @@ namespace PlayR
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            
 
             RegisterGlobalFilters(GlobalFilters.Filters);
             RegisterRoutes(RouteTable.Routes);

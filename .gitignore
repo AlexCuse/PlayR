@@ -10,3 +10,6 @@ TestResults
 
 # resharper
 *ReSharper*
+
+# squishit
+PlayR/Scripts/combined/*.js

@@ -9,8 +9,12 @@
 </div>
 <input type="text" id="msg" />
 <input type="button" id="send" value="send" />
-<script src="Scripts/jquery.signalR-0.5.0.min.js" type="text/javascript"></script>
-<script src="/signalr/hubs" type="text/javascript"></script>
+@Html.Raw(SquishIt.Framework.Bundle.JavaScript()
+.Add("Scripts/jquery.signalR-0.5.0.min.js")
+//force packaging hubs with signalr
+.AddRemote(null, HttpContext.Current.Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped) + "/signalr/hubs", true)
+.ForceRelease()
+.Render("~/Scripts/combined/signalrAndHubs_#.js"))
 <script type="text/javascript">
     $(document).ready(function () {
         // Proxy created on the fly
