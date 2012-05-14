@@ -7,11 +7,6 @@ namespace PlayR.Hubs
     {
         readonly IMessageLogger _messageLogger;
 
-        public Chat()
-            : this(new DatabaseMessageLogger())
-        {
-        }
-
         public Chat(IMessageLogger messageLogger)
         {
             _messageLogger = messageLogger;

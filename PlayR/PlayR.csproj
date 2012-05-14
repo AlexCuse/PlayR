@@ -109,6 +109,7 @@
     </Compile>
     <Compile Include="Hubs\Chat.cs" />
     <Compile Include="Core\DatabaseMessageLogger.cs" />
+    <Compile Include="Infrastructure\StructureMapHubActivator.cs" />
     <Compile Include="Infrastructure\StructureMapResolver.cs" />
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

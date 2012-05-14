@@ -14,7 +14,7 @@ namespace PlayR.Core
 
         public void LogMessage(string message, string user)
         {
-            using(var command = new SqlCommand("insert into Messages values (@user, @message)", connection))
+            using(var command = new SqlCommand("insert into Messages (UserName, Message) values (@user, @message)", connection))
             {
                 command.Parameters.AddWithValue("user", user);
                 command.Parameters.AddWithValue("message", message);

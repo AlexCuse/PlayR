@@ -1,11 +1,9 @@
-﻿using System;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
 using System.Web.Routing;
 using PlayR.Core;
 using PlayR.Hubs;
 using PlayR.Infrastructure;
 using SignalR;
-using SignalR.Hosting.AspNet;
 using SignalR.Hubs;
 using SignalR.Infrastructure;
 using StructureMap;
@@ -38,13 +36,36 @@ namespace PlayR
 
         protected void Application_Start()
         {
-            //ObjectFactory.Initialize(c => {
-            //    c.For<IMessageLogger>().Singleton().Use(() => logger);
-            //    c.For<Chat>().Use<Chat>();
-            //    c.For<IDependencyResolver>().Add<StructureMapResolver>();
-            //});
+            ObjectFactory.Initialize(c =>
+            {
+                c.For<IMessageLogger>().Singleton().Use<DatabaseMessageLogger>();
+                c.Scan(scanner =>
+                           {
+                               scanner.TheCallingAssembly();
+                               scanner.AddAllTypesOf<Hub>();
+                           });
+
+                //defaults
+                /*
+                c.For<IMessageBus>().Use<InProcessMessageBus>();
+                c.For<IConnectionIdGenerator>().Use<GuidConnectionIdGenerator>();
+                c.For<IAssemblyLocator>().Use<DefaultAssemblyLocator>();
+                c.For<IJavaScriptProxyGenerator>().Use<DefaultJavaScriptProxyGenerator>();
+                c.For<IJavaScriptMinifier>().Use<NullJavaScriptMinifier>();
+                c.For<IJsonSerializer>().Use<JsonConvertAdapter>();
+                c.For<IHubManager>().Use<DefaultHubManager>();
+                c.For<ITraceManager>().Use<TraceManager>();
+                */
+
+                //c.For<IHubActivator>().Use<StructureMapHubActivator>();
+                
+                //c.For<IDependencyResolver>().Use<StructureMapResolver>();
+            });
 
             //GlobalHost.DependencyResolver = ObjectFactory.GetInstance<IDependencyResolver>();
+
+            GlobalHost.DependencyResolver.Register(typeof(IHubActivator), () => new StructureMapHubActivator());
+
             RouteTable.Routes.MapHubs();
 
             AreaRegistration.RegisterAllAreas();

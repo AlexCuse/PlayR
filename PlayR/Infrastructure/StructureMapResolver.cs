@@ -38,5 +38,4 @@ namespace PlayR.Infrastructure
             return objects;
         }
     }
-
 }
