@@ -21,6 +21,7 @@ namespace PlayR.Core
 
                 connection.Open();
                 command.ExecuteNonQuery();
+                connection.Close();
             }
         }
 
