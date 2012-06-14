@@ -12,7 +12,7 @@
 @Html.Raw(SquishIt.Framework.Bundle.JavaScript()
 .Add("Scripts/jquery.signalR-0.5.0.min.js")
 //force packaging hubs with signalr
-.AddRemote("/signalr/hubs", HttpContext.Current.Request.Url.GetComponents(UriComponents.SchemeAndServer, UriFormat.Unescaped) + "/signalr/hubs", true)
+.AddDynamic("/signalr/hubs")
 //.ForceRelease()
 .Render("~/Scripts/combined/signalrAndHubs_#.js"))
 <script type="text/javascript">
